@@ -199,7 +199,12 @@
             </tr>
             <tr>
                 <td class="sum borderHiddden">Metoda płatności:</td>
-                <td class="borderHiddden">{{$invoice->payment_method}}</td>
+                @if ($invoice->payment_method == 'bank_transfer')
+                <td class="borderHiddden">przelew</td>
+                @endif
+                @if ($invoice->payment_method == 'cash')
+                <td class="borderHiddden">gotówka</td>
+                @endif
             </tr>
             @if ($invoice->payment_method == 'bank_transfer')
             <tr>
