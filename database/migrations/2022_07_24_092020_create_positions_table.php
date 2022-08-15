@@ -19,7 +19,7 @@ class CreatePositionsTable extends Migration
             $table->string('name');
             $table->enum('tax',['8', '23']);
             $table->decimal('price');
-            $table->unsignedBigInteger('invoices_id');
+            $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices');
         });
     }
