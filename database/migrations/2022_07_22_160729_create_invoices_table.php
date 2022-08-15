@@ -16,7 +16,6 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->text('positions');
             $table->enum('payment_method',['cash', 'bank_transfer']);
             $table->string('account_number')->nullable();
             $table->unsignedBigInteger('customer_id');

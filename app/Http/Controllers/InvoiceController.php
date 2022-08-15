@@ -65,6 +65,8 @@ class InvoiceController extends Controller
         'positions.*.name' => 'required|string', //* check every json inside 
         'positions.*.tax' => 'in:8,23',
         'positions.*.price' => 'required|string',
+        'positions.*.amount' => 'required|integer',
+        'positions.*.measure' => 'required|string',
         'payment_method' => 'in:cash,bank_transfer',
         'customer_id' => 'required|integer',
         ];
@@ -86,12 +88,17 @@ class InvoiceController extends Controller
                 'message' =>'Customer not found']
                 , 404);
         }
-
-        $invoice = Invoice::create(
-                    ['payment_method' => $request->payment_method,
-                     'customer_id' => $request->customer_id,
-                     'user_id' => auth()->user()->id,],
-                );
+        
+        $invoice = 
+            ['payment_method' => $request->payment_method,
+             'customer_id' => $request->customer_id,
+             'user_id' => auth()->user()->id,];
+        
+        if($request->payment_method == 'bank_transfer'){
+        $invoice = array_merge($invoice, ["account_number" => $request->account_number]);
+           }
+        
+        $invoice = Invoice::create($invoice);
 
         $invoice->positions()->createMany(
                 $request->positions
@@ -168,6 +175,8 @@ class InvoiceController extends Controller
         'positions.*.price' => 'required|string',
         'payment_method' => 'in:cash,bank_transfer',
         'customer_id' => 'required|integer',
+        'positions.*.amount' => 'required|integer',
+        'positions.*.measure' => 'required|string',
         ];
 
         $validator = Validator::make($request->all(), $validationRules);

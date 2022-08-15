@@ -1,12 +1,8 @@
-
-# Invoice-Creator 
-
-
 ## Installation
 
 Clone the repository
 ```bash
-git clone git@github.com:PyziaA/Invoice-Creator.git
+git clone https://github.com/PyziaA/Invoice-Creator.git
 ```
 Switch to the project folder
 ```bash
@@ -26,7 +22,7 @@ php artisan key:generate
 ```  
 Generate a new JWT authentication secret key
 ```bash
-php artisan jwt:generate
+php artisan jwt:secret
 ```  
 Run the database migrations (Set the database connection in .env before migrating)
 ```bash
@@ -50,8 +46,6 @@ php artisan serve
 **User logout** ```POST /auth/logout```
 
 **Refresh jwt token** ```POST /auth/refresh```
-
-**Get user profile** ```GET /auth/user-profile```
 
 ***CUSTOMER***
 

@@ -14,6 +14,8 @@ class Position extends Model
         'name',
         'tax',
         'price',
+        'amount',
+        'measure'
     ];
 
     public function invoice()
